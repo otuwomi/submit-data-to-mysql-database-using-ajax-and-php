@@ -1,0 +1,155 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+  function payWithPaystack(){
+    var amount = document.getElementById("sub_amount").value;
+    var id = document.getElementById("id").value;
+    var fullname = document.getElementById("fullname").value;
+	var email = document.getElementById("sub_email").value;
+	var phone = document.getElementById("sub_phone").value;
+    var handler = PaystackPop.setup({
+	
+	
+	
+      key: 'pk_test_b652c8035ad87fcb9c7bfdce548c6f5d68f12c18',
+      email: email,
+      amount: amount * 100,
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      metadata: {
+         custom_fields: [
+            {
+                display_name: "Mobile Number",
+                variable_name: "mobile_number",
+                value: phone
+            }
+         ]
+      },
+      callback: function(response){
+       var reference = document.getElementById("sub_phone").value = + response.reference;    
+          if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("sub_success_modal").style.display = "block";
+                document.getElementById("sub_success_data").innerHTML = this.responseText;
+                document.getElementById("lazy_loader_sub_success_data").style.display = "none";
+            }else{
+                document.getElementById("sub_success_modal").style.display = "block";
+                document.getElementById("lazy_loader_sub_success_data").style.display = "block";
+                }
+        };
+        
+    data = new FormData()
+    data.set('amount',amount)
+    data.set('id',id)
+    data.set('fullname',fullname)
+    data.set('email',email)
+    data.set('phone',phone)
+    data.set('reference',reference)
+        let request = new XMLHttpRequest();
+  xmlhttp.open("POST","patient_data/paystack/index.php", true);
+  timeout: 1000; 
+ xmlhttp.send(data);
+ 
+ 
+          
+         // alert('success. transaction ref is ' + response.reference);
+         // var success_amount = document.getElementById("donate_phone").value = + response.reference;
+         
+         
+         
+      },
+      onClose: function(){
+          //alert('window closed');
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+
+<button type="button" id="renew_sub" class="w3-button w3-round-large w3-blue w3-right" onclick="payWithPaystack()"><i class="fas fa-angle-double-right"></i></button></span>
+      <input type="hidden" id="sub_amount" value="25000">
+      <input type="hidden" id="id" value="2">
+      <input type="hidden" id="sub_email" value="womypop@gmail.com">
+      <input type="hidden" id="fullname" value="Womipop">
+      <input type="hidden" id="sub_phone" value="">
+      
+      
+      <script>
+  function payWithPaystack(){
+    var amount = document.getElementById("sub_amount").value;
+    var id = document.getElementById("id").value;
+    var fullname = document.getElementById("fullname").value;
+	var email = document.getElementById("sub_email").value;
+	var phone = document.getElementById("sub_phone").value;
+    var handler = PaystackPop.setup({
+	
+	
+	
+      key: 'pk_test_b652c8035ad87fcb9c7bfdce548c6f5d68f12c18',
+      email: email,
+      amount: amount * 100,
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      metadata: {
+         custom_fields: [
+            {
+                display_name: "Mobile Number",
+                variable_name: "mobile_number",
+                value: phone
+            }
+         ]
+      },
+      callback: function(response){
+       var reference = document.getElementById("sub_phone").value = + response.reference;    
+          if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("sub_success_modal").style.display = "block";
+                document.getElementById("sub_success_data").innerHTML = this.responseText;
+                document.getElementById("lazy_loader_sub_success_data").style.display = "none";
+            }else{
+                document.getElementById("sub_success_modal").style.display = "block";
+                document.getElementById("lazy_loader_sub_success_data").style.display = "block";
+                }
+        };
+        
+    data = new FormData()
+    data.set('amount',amount)
+    data.set('id',id)
+    data.set('fullname',fullname)
+    data.set('email',email)
+    data.set('phone',phone)
+    data.set('reference',reference)
+        let request = new XMLHttpRequest();
+  xmlhttp.open("POST","patient_data/paystack/index.php", true);
+  timeout: 1000; 
+ xmlhttp.send(data);
+ 
+ 
+          
+         // alert('success. transaction ref is ' + response.reference);
+         // var success_amount = document.getElementById("donate_phone").value = + response.reference;
+         
+         
+         
+      },
+      onClose: function(){
+          //alert('window closed');
+      }
+    });
+    handler.openIframe();
+  }
+</script>
